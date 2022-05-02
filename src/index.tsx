@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-class Square extends React.Component<{ value: number }, {value: string}> {
-  constructor(props: {value: number}) {
+class Square extends React.Component<{ value: string }, {value: string}> {
+  constructor(props: {value: string}) {
     super(props);
     this.state = {
       value: null!,
@@ -18,9 +18,15 @@ class Square extends React.Component<{ value: number }, {value: string}> {
   }
 }
 
-class Board extends React.Component {
+class Board extends React.Component<{}, {squares: Array<string>}> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null!),
+    };
+  }
   renderSquare(i: number) {
-    return <Square value={i} />;
+    return <Square value={this.state.squares[i]} />;
   }
 
   render() {
