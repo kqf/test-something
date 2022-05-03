@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Square(props: any) {
+function Square(props: {value: string, onClick: () => void}) {
   return (
     <button className="square" onClick={props.onClick}>
       {props.value}
