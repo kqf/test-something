@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-class Square extends React.Component<{ value: string }, { value: string }> {
+class Square extends React.Component<{ value: string, onClick: () => void}, { value: string }> {
   render() {
     return (
       <button className="square" onClick={() => this.setState({ value: "X" })}>
@@ -23,6 +23,10 @@ class Board extends React.Component<{}, { squares: Array<string> }> {
       value={this.state.squares[i]}
       onClick={() => this.handleClick(i)}
     />;
+  }
+
+  handleClick(i: number) {
+
   }
 
   render() {
