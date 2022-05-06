@@ -81,7 +81,7 @@ class Game extends React.Component {
   }
 }
 
-function calculateWinner(squares: Array<number>) {
+function calculateWinner(squares: Array<string>) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
