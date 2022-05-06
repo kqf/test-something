@@ -10,11 +10,12 @@ function Square(props: {value: string, onClick: () => void}) {
   );
 }
 
-class Board extends React.Component<{}, { squares: Array<string> }> {
+class Board extends React.Component<{}, { squares: Array<string>, xIsNext: boolean }> {
   constructor(props: {}) {
     super(props);
     this.state = {
       squares: Array(9).fill(null!),
+      xIsNext: true,
     };
   }
   renderSquare(i: number) {
@@ -26,9 +27,11 @@ class Board extends React.Component<{}, { squares: Array<string> }> {
 
   handleClick(i: number) {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
-    console.log("clicked")
-    this.setState({ squares: squares });
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
   }
 
   render() {
