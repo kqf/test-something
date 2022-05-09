@@ -10,17 +10,17 @@ function Square(props: { value: string, onClick: () => void }) {
   );
 }
 
-class Board extends React.Component<{}, { squares: Array<string>, xIsNext: boolean }> {
+class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean }> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null!),
+      history: [Array(9).fill(null!)],
       xIsNext: true,
     };
   }
   renderSquare(i: number) {
     return <Square
-      value={this.state.squares[i]}
+      value={this.state.history[this.state.history.length - 1][i]}
       onClick={() => this.handleClick(i)}
     />;
   }
