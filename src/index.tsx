@@ -26,13 +26,18 @@ class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext
   }
 
   handleClick(i: number) {
-    const squares = this.state.squares.slice();
+    const squares = this.state.history[this.state.history.length - 1].slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    // Update the history
+    var history = this.state.history.slice()
+    history.push(squares)
+
     this.setState({
-      squares: squares,
+      history: history,
       xIsNext: !this.state.xIsNext,
     });
   }
