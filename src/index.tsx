@@ -10,41 +10,17 @@ function Square(props: { value: string, onClick: () => void }) {
   );
 }
 
-class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean }> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      history: [Array(9).fill(null!)],
-      xIsNext: true,
-    };
-  }
+class Board extends React.Component<{ squares: Array<string>, onClick: (i: number) => void }> {
   renderSquare(i: number) {
     return <Square
-      value={this.state.history[this.state.history.length - 1][i]}
-      onClick={() => this.handleClick(i)}
+      value={this.props.squares[i]}
+      onClick={() => this.props.onClick(i)}
     />;
-  }
-
-  handleClick(i: number) {
-    const squares = this.state.history[this.state.history.length - 1].slice();
-    if (calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-
-    // Update the history
-    var history = this.state.history.slice()
-    history.push(squares)
-
-    this.setState({
-      history: history,
-      xIsNext: !this.state.xIsNext,
-    });
   }
 
   render() {
     const winner = calculateWinner(
-      this.state.history[this.state.history.length - 1]
+      this.props.squares
     );
 
     let status;
@@ -76,12 +52,41 @@ class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext
   }
 }
 
-class Game extends React.Component {
+class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean }> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      history: [Array(9).fill(null!)],
+      xIsNext: true,
+    };
+  }
+
+  handleClick(i: number) {
+    const squares = this.state.history[this.state.history.length - 1].slice();
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    // Update the history
+    var history = this.state.history.slice()
+    history.push(squares)
+
+    this.setState({
+      history: history,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
+
   render() {
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board
+            squares={this.state.history[this.state.history.length - 1]}
+            onClick={this.handleClick}
+          />
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
