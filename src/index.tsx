@@ -43,7 +43,10 @@ class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext
   }
 
   render() {
-    const winner = calculateWinner(this.state.squares);
+    const winner = calculateWinner(
+      this.state.history[this.state.history.length - 1]
+    );
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
