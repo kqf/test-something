@@ -10,35 +10,43 @@ function Square(props: { value: string, onClick: () => void }) {
   );
 }
 
-class Board extends React.Component<{}, { squares: Array<string>, xIsNext: boolean }> {
+class Board extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean }> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null!),
+      history: [Array(9).fill(null!)],
       xIsNext: true,
     };
   }
   renderSquare(i: number) {
     return <Square
-      value={this.state.squares[i]}
+      value={this.state.history[this.state.history.length - 1][i]}
       onClick={() => this.handleClick(i)}
     />;
   }
 
   handleClick(i: number) {
-    const squares = this.state.squares.slice();
+    const squares = this.state.history[this.state.history.length - 1].slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    // Update the history
+    var history = this.state.history.slice()
+    history.push(squares)
+
     this.setState({
-      squares: squares,
+      history: history,
       xIsNext: !this.state.xIsNext,
     });
   }
 
   render() {
-    const winner = calculateWinner(this.state.squares);
+    const winner = calculateWinner(
+      this.state.history[this.state.history.length - 1]
+    );
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
