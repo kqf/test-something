@@ -80,7 +80,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
-    const moves = this.state.history.map((step, move) => {
+    const moves = this.state.history.map((step: Array<string>, move: number) => {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
