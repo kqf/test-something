@@ -66,6 +66,8 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
 
   }
 
+  jumpTo(i: number) {
+  }
 
   render() {
     const winner = calculateWinner(
@@ -77,6 +79,19 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
+
+    const moves = this.state.history.map((step: Array<string>, move: number) => {
+      const desc = move ?
+        'Go to move #' + move :
+        'Go to game start';
+      return (
+        <li>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    });
+
+
     return (
       <div className="game">
         <div className="game-board">
@@ -87,7 +102,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{moves}</ol>
         </div>
       </div>
     );
