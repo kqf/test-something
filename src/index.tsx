@@ -65,6 +65,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
       history: history,
       xIsNext: !this.state.xIsNext,
     });
+
   }
 
 
@@ -83,7 +84,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
         <div className="game-board">
           <Board
             squares={this.state.history[this.state.history.length - 1]}
-            onClick={this.handleClick}
+            onClick={(i: number) => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
