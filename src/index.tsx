@@ -41,18 +41,18 @@ class Board extends React.Component<{ squares: Array<string>, onClick: (i: numbe
   }
 }
 
-class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, stepNumber: number }> {
+class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, step: number }> {
   constructor(props: {}) {
     super(props);
     this.state = {
       history: [Array(9).fill(null!)],
       xIsNext: true,
-      stepNumber: 0,
+      step: 0,
     };
   }
 
   handleClick(i: number) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const history = this.state.history.slice(0, this.state.step + 1);
     const squares = history[history.length - 1].slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -64,20 +64,20 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
     this.setState({
       history: this.state.history.concat([squares]),
       xIsNext: !this.state.xIsNext,
-      stepNumber: history.length,
+      step: history.length,
     });
 
   }
 
   jumpTo(step: number) {
     this.setState({
-      stepNumber: step,
+      step: step,
       xIsNext: (step % 2) === 0,
     });
   }
 
   render() {
-    const winner = calculateWinner(this.state.history[this.state.stepNumber]);
+    const winner = calculateWinner(this.state.history[this.state.step]);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
