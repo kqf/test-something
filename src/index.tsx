@@ -67,7 +67,11 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
 
   }
 
-  jumpTo(i: number) {
+  jumpTo(step: number) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: (step % 2) === 0,
+    });
   }
 
   render() {
