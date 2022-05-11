@@ -41,12 +41,13 @@ class Board extends React.Component<{ squares: Array<string>, onClick: (i: numbe
   }
 }
 
-class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean }> {
+class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, stepNumber: number }> {
   constructor(props: {}) {
     super(props);
     this.state = {
       history: [Array(9).fill(null!)],
       xIsNext: true,
+      stepNumber: 0,
     };
   }
 
