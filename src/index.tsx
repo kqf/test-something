@@ -10,30 +10,24 @@ function Square(props: { value: string, onClick: () => void }) {
   );
 }
 
-function renderSquare(value: string, onClick: () => void) {
-  return <Square
-    value={value}
-    onClick={onClick}
-  />;
-}
 class Board extends React.Component<{ squares: Array<string>, onClick: (i: number) => void }> {
   render() {
     return (
       <div>
         <div className="board-row">
-          {renderSquare(this.props.squares[0], () => this.props.onClick(0))}
-          {renderSquare(this.props.squares[1], () => this.props.onClick(1))}
-          {renderSquare(this.props.squares[2], () => this.props.onClick(2))}
+          <Square value={this.props.squares[0]} onClick={() => this.props.onClick(0)} />
+          <Square value={this.props.squares[1]} onClick={() => this.props.onClick(1)} />
+          <Square value={this.props.squares[2]} onClick={() => this.props.onClick(2)} />
         </div>
         <div className="board-row">
-          {renderSquare(this.props.squares[3], () => this.props.onClick(3))}
-          {renderSquare(this.props.squares[4], () => this.props.onClick(4))}
-          {renderSquare(this.props.squares[5], () => this.props.onClick(5))}
+          <Square value={this.props.squares[3]} onClick={() => this.props.onClick(3)} />
+          <Square value={this.props.squares[4]} onClick={() => this.props.onClick(4)} />
+          <Square value={this.props.squares[5]} onClick={() => this.props.onClick(5)} />
         </div>
         <div className="board-row">
-          {renderSquare(this.props.squares[6], () => this.props.onClick(6))}
-          {renderSquare(this.props.squares[7], () => this.props.onClick(7))}
-          {renderSquare(this.props.squares[8], () => this.props.onClick(8))}
+          <Square value={this.props.squares[6]} onClick={() => this.props.onClick(6)} />
+          <Square value={this.props.squares[7]} onClick={() => this.props.onClick(7)} />
+          <Square value={this.props.squares[8]} onClick={() => this.props.onClick(8)} />
         </div>
       </div>
     );
