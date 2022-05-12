@@ -10,31 +10,30 @@ function Square(props: { value: string, onClick: () => void }) {
   );
 }
 
+function renderSquare(value: string, onClick: () => void) {
+  return <Square
+    value={value}
+    onClick={onClick}
+  />;
+}
 class Board extends React.Component<{ squares: Array<string>, onClick: (i: number) => void }> {
-  renderSquare(i: number) {
-    return <Square
-      value={this.props.squares[i]}
-      onClick={() => this.props.onClick(i)}
-    />;
-  }
-
   render() {
     return (
       <div>
         <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {renderSquare(this.props.squares[0], () => this.props.onClick(0))}
+          {renderSquare(this.props.squares[1], () => this.props.onClick(1))}
+          {renderSquare(this.props.squares[2], () => this.props.onClick(2))}
         </div>
         <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {renderSquare(this.props.squares[3], () => this.props.onClick(3))}
+          {renderSquare(this.props.squares[4], () => this.props.onClick(4))}
+          {renderSquare(this.props.squares[5], () => this.props.onClick(5))}
         </div>
         <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {renderSquare(this.props.squares[6], () => this.props.onClick(6))}
+          {renderSquare(this.props.squares[7], () => this.props.onClick(7))}
+          {renderSquare(this.props.squares[8], () => this.props.onClick(8))}
         </div>
       </div>
     );
