@@ -10,17 +10,25 @@ function Square(props: { label: string, onClick: () => void }) {
   );
 }
 
-function Board(props: { squares: Array<string>, onClick: (i: number) => void }) {
+function Board(props: { squares: Array<string>, onClick: (i: number) => void, nRows: number }) {
   const tiles = props.squares.map((square, index) => {
     return (
+      <Square label={square} onClick={() => props.onClick(index)} />
+    );
+  })
+
+  const nTiles = Math.floor(tiles.length / props.nRows);
+  const rows = Array.from({ length: props.nRows }, (x, i) => {
+    return (
       <div className="board-row">
-        <Square label={square} onClick={() => props.onClick(index)} />
+        {tiles.slice(i * nTiles, (i + 1) * nTiles)}
       </div>
     )
-  })
+  });
+
   return (
     <div>
-      {tiles}
+      {rows}
     </div>
   );
 }
@@ -87,6 +95,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
           <Board
             squares={this.state.history[this.state.history.length - 1]}
             onClick={(i: number) => this.handleClick(i)}
+            nRows={3}
           />
         </div>
         <div className="game-info">
