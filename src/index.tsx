@@ -10,24 +10,25 @@ function Square(props: { label: string, onClick: () => void }) {
   );
 }
 
-function Board(props: { squares: Array<string>, onClick: (i: number) => void }) {
+function Board(props: { squares: Array<string>, onClick: (i: number) => void, nRows: number }) {
+  const tiles = props.squares.map((square, index) => {
+    return (
+      <Square label={square} onClick={() => props.onClick(index)} />
+    );
+  })
+
+  const nTiles = Math.floor(tiles.length / props.nRows);
+  const rows = Array.from({ length: props.nRows }, (x, i) => {
+    return (
+      <div className="board-row">
+        {tiles.slice(i * nTiles, (i + 1) * nTiles)}
+      </div>
+    )
+  });
+
   return (
     <div>
-      <div className="board-row">
-        <Square label={props.squares[0]} onClick={() => props.onClick(0)} />
-        <Square label={props.squares[1]} onClick={() => props.onClick(1)} />
-        <Square label={props.squares[2]} onClick={() => props.onClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square label={props.squares[3]} onClick={() => props.onClick(3)} />
-        <Square label={props.squares[4]} onClick={() => props.onClick(4)} />
-        <Square label={props.squares[5]} onClick={() => props.onClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square label={props.squares[6]} onClick={() => props.onClick(6)} />
-        <Square label={props.squares[7]} onClick={() => props.onClick(7)} />
-        <Square label={props.squares[8]} onClick={() => props.onClick(8)} />
-      </div>
+      {rows}
     </div>
   );
 }
@@ -94,6 +95,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
           <Board
             squares={this.state.history[this.state.history.length - 1]}
             onClick={(i: number) => this.handleClick(i)}
+            nRows={3}
           />
         </div>
         <div className="game-info">
