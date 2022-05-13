@@ -11,23 +11,16 @@ function Square(props: { label: string, onClick: () => void }) {
 }
 
 function Board(props: { squares: Array<string>, onClick: (i: number) => void }) {
+  const tiles = props.squares.map((square, index) => {
+    return (
+      <div className="board-row">
+        <Square label={square} onClick={() => props.onClick(index)} />
+      </div>
+    )
+  })
   return (
     <div>
-      <div className="board-row">
-        <Square label={props.squares[0]} onClick={() => props.onClick(0)} />
-        <Square label={props.squares[1]} onClick={() => props.onClick(1)} />
-        <Square label={props.squares[2]} onClick={() => props.onClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square label={props.squares[3]} onClick={() => props.onClick(3)} />
-        <Square label={props.squares[4]} onClick={() => props.onClick(4)} />
-        <Square label={props.squares[5]} onClick={() => props.onClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square label={props.squares[6]} onClick={() => props.onClick(6)} />
-        <Square label={props.squares[7]} onClick={() => props.onClick(7)} />
-        <Square label={props.squares[8]} onClick={() => props.onClick(8)} />
-      </div>
+      {tiles}
     </div>
   );
 }
