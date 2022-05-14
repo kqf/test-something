@@ -45,12 +45,20 @@ function ControlPanel(props: {}) {
   );
 }
 
-class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, step: number }> {
+class Game extends React.Component<
+  {},
+  {
+    history: Array<Array<string>>,
+    selected: Array<number>,
+    xIsNext: boolean,
+    step: number,
+  }> {
   constructor(props: {}) {
     super(props);
     this.state = {
       history: [Array(9).fill(null!)],
       xIsNext: true,
+      selected: [],
       step: 0,
     };
   }
