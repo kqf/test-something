@@ -41,16 +41,23 @@ function ControlPanel(props: {}) {
       <Label for="exampleText">Type color</Label>
       <Input type="textarea" name="text" id="exampleText" />
     </FormGroup>
-
   );
 }
 
-class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, step: number }> {
+class Game extends React.Component<
+  {},
+  {
+    history: Array<Array<string>>,
+    selected: Array<number>,
+    xIsNext: boolean,
+    step: number,
+  }> {
   constructor(props: {}) {
     super(props);
     this.state = {
       history: [Array(9).fill(null!)],
       xIsNext: true,
+      selected: [],
       step: 0,
     };
   }
@@ -64,9 +71,14 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
 
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
+    const xappend = (x: Array<number>, i:number) => (
+      x.includes(i) ? x.filter((element) => (element === i)) : x.concat([i])
+    )
+
     // Update the history
     this.setState({
       history: this.state.history.concat([squares]),
+      selected: xappend(this.state.selected, i),
       xIsNext: !this.state.xIsNext,
       step: history.length,
     });
@@ -100,7 +112,6 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
       );
     });
 
-
     return (
       <div className="game">
         <div className="game-board">
@@ -112,11 +123,11 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-        <div>
-          <ControlPanel />
-        </div>
+            <ol>{moves}</ol>
+          </div>
+          <div>
+            {this.state.selected.length > 0 ? (<ControlPanel />) : null}
+          </div>
       </div>
     );
   }
