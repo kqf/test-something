@@ -72,7 +72,7 @@ class Game extends React.Component<
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
     const xappend = (x: Array<number>, i:number) => (
-      x.includes(i) ? x.filter((element) => (element === i)) : x.concat([i])
+      x.includes(i) ? x.filter((element) => (element !== i)) : x.concat([i])
     )
 
     // Update the history
