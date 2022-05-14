@@ -41,7 +41,6 @@ function ControlPanel(props: {}) {
       <Label for="exampleText">Type color</Label>
       <Input type="textarea" name="text" id="exampleText" />
     </FormGroup>
-
   );
 }
 
@@ -113,7 +112,6 @@ class Game extends React.Component<
       );
     });
 
-
     return (
       <div className="game">
         <div className="game-board">
@@ -124,8 +122,12 @@ class Game extends React.Component<
           />
         </div>
         <div className="game-info">
-          <div>{status}</div> <ol>{moves}</ol> </div> <div> <ControlPanel />
-        </div>
+          <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
+          <div>
+            {this.state.selected.length > 0 ? (<ControlPanel />) : null}
+          </div>
       </div>
     );
   }
