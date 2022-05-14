@@ -65,14 +65,14 @@ class Game extends React.Component<
   handleClick(i: number) {
     const history = this.state.history.slice(0, this.state.step + 1);
     const squares = history[history.length - 1].slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares)) {
       return;
     }
 
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
-    const xappend = (x: Array<number>, i:number) => (
-      x.includes(i) ? x.filter((element) => (element !== i)) : x.concat([i])
+    let xappend = (x: Array<number>, i:number) => (
+      x.includes(i) ? x.filter(element => element !== i) : x.concat([i])
     )
 
     // Update the history
@@ -82,7 +82,6 @@ class Game extends React.Component<
       xIsNext: !this.state.xIsNext,
       step: history.length,
     });
-
   }
 
   jumpTo(step: number) {
