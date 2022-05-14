@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { FormGroup, Label, Input } from 'reactstrap';
+
 import './index.css';
 
 function Square(props: { label: string, onClick: () => void }) {
@@ -101,6 +103,12 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
         <div className="game-info">
           <div>{status}</div>
           <ol>{moves}</ol>
+        </div>
+        <div>
+          <FormGroup>
+            <Label for="exampleText">Type color</Label>
+            <Input type="textarea" name="text" id="exampleText" />
+          </FormGroup>
         </div>
       </div>
     );
