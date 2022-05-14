@@ -35,6 +35,16 @@ function Board(props: { squares: Array<string>, onClick: (i: number) => void, nR
   );
 }
 
+function ControlPanel(props: {}) {
+  return (
+    <FormGroup>
+      <Label for="exampleText">Type color</Label>
+      <Input type="textarea" name="text" id="exampleText" />
+    </FormGroup>
+
+  );
+}
+
 class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext: boolean, step: number }> {
   constructor(props: {}) {
     super(props);
@@ -105,10 +115,7 @@ class Game extends React.Component<{}, { history: Array<Array<string>>, xIsNext:
           <ol>{moves}</ol>
         </div>
         <div>
-          <FormGroup>
-            <Label for="exampleText">Type color</Label>
-            <Input type="textarea" name="text" id="exampleText" />
-          </FormGroup>
+          <ControlPanel />
         </div>
       </div>
     );
