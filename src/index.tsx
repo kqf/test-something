@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 
 import './index.css';
 
@@ -37,10 +37,13 @@ function Board(props: { squares: Array<string>, onClick: (i: number) => void, nR
 
 function ControlPanel(props: {}) {
   return (
-    <FormGroup>
-      <Label for="exampleText">Type color</Label>
-      <Input type="textarea" name="text" id="exampleText" />
-    </FormGroup>
+    <Form>
+      <FormGroup>
+        <Label for="exampleText">Type color</Label>
+        <Input type="textarea" name="text" id="exampleText" />
+
+      </FormGroup>
+    </Form>
   );
 }
 
@@ -111,6 +114,7 @@ class Game extends React.Component<
       );
     });
 
+    const panel = <ControlPanel />
     return (
       <div className="game">
         <div className="game-board">
@@ -125,7 +129,7 @@ class Game extends React.Component<
             <ol>{moves}</ol>
           </div>
           <div>
-            {this.state.selected.length > 0 ? (<ControlPanel />) : null}
+            {this.state.selected.length > 0 ? panel : null}
           </div>
       </div>
     );
