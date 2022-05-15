@@ -35,7 +35,7 @@ function Board(props: { squares: Array<string>, onClick: (i: number) => void, nR
   );
 }
 
-function ControlPanel(props: {onSubmit: (event: any) => void}) {
+function ControlPanel(props: {onSubmit: (event: React.FormEvent<HTMLFormElement>) => void}) {
   return (
     <Form onSubmit={props.onSubmit}>
       <FormGroup>
