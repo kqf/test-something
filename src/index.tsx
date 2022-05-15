@@ -134,7 +134,10 @@ class Game extends React.Component<
       );
     });
 
-    const panel = <ControlPanel onSubmit={(event: SubmitEvent) => this.handleSubmit(event)}/>
+    const panel = <ControlPanel
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
+    />
+
     return (
       <div className="game">
         <div className="game-board">
