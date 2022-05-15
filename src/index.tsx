@@ -91,9 +91,8 @@ class Game extends React.Component<
 
   handleSubmit(event: any) {
     event.preventDefault();
-    console.log(event);
-    console.log(event.target.userdata.value)
-    const data = "lol";
+
+    const data = event.target.userdata.value;
     const selected = this.state.selected.slice();
     const history = this.state.history.slice(0, this.state.step + 1);
     const squares = history[history.length - 1].slice();
