@@ -35,7 +35,7 @@ function Board(props: { squares: Array<string>, onClick: (i: number) => void, nR
   );
 }
 
-function ControlPanel(props: {onSubmit: (event: any) => void}) {
+function ControlPanel(props: {onSubmit: (event: React.FormEvent<HTMLFormElement>) => void}) {
   return (
     <Form onSubmit={props.onSubmit}>
       <FormGroup>
@@ -134,7 +134,10 @@ class Game extends React.Component<
       );
     });
 
-    const panel = <ControlPanel onSubmit={(event: SubmitEvent) => this.handleSubmit(event)}/>
+    const panel = <ControlPanel
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
+    />
+
     return (
       <div className="game">
         <div className="game-board">
