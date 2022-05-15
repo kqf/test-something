@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './index.css';
 
@@ -35,12 +35,17 @@ function Board(props: { squares: Array<string>, onClick: (i: number) => void, nR
   );
 }
 
-function ControlPanel(props: {}) {
+function ControlPanel(props: {onSubmit: (event: any) => void}) {
   return (
-    <FormGroup>
-      <Label for="exampleText">Type color</Label>
-      <Input type="textarea" name="text" id="exampleText" />
-    </FormGroup>
+    <Form onSubmit={props.onSubmit}>
+      <FormGroup>
+        <Label for="exampleText">Type color</Label>
+        <Input type="textarea" name="userdata" id="exampleText" />
+        <Button>
+          Submit
+        </Button>
+      </FormGroup>
+    </Form>
   );
 }
 
@@ -84,6 +89,24 @@ class Game extends React.Component<
     });
   }
 
+  handleSubmit(event: any) {
+    event.preventDefault();
+
+    const data = event.target.userdata.value;
+    const selected = this.state.selected.slice();
+    const history = this.state.history.slice(0, this.state.step + 1);
+    const squares = history[history.length - 1].slice();
+
+    const updated = squares.map((element, index) => {
+      return selected.includes(index) ? data : element;
+    })
+
+    this.setState({
+      history: this.state.history.concat([updated]),
+      step: this.state.step + 1
+    });
+  }
+
   jumpTo(step: number) {
     this.setState({
       step: step,
@@ -111,6 +134,7 @@ class Game extends React.Component<
       );
     });
 
+    const panel = <ControlPanel onSubmit={(event: SubmitEvent) => this.handleSubmit(event)}/>
     return (
       <div className="game">
         <div className="game-board">
@@ -125,7 +149,7 @@ class Game extends React.Component<
             <ol>{moves}</ol>
           </div>
           <div>
-            {this.state.selected.length > 0 ? (<ControlPanel />) : null}
+            {this.state.selected.length > 0 ? panel : null}
           </div>
       </div>
     );
