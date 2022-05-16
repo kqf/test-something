@@ -11,7 +11,6 @@ function Square(props: { label: string, onClick: () => void }) {
       onClick={props.onClick}
       style={{background: props.label}}
     >
-      {props.label}
     </button>
   );
 }
