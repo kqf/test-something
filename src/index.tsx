@@ -6,7 +6,11 @@ import './index.css';
 
 function Square(props: { label: string, onClick: () => void }) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button
+      className="square"
+      onClick={props.onClick}
+      style={{color: props.label}}
+    >
       {props.label}
     </button>
   );
