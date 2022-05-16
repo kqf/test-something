@@ -11,7 +11,6 @@ function Square(props: { label: string, onClick: () => void }) {
       onClick={props.onClick}
       style={{background: props.label}}
     >
-      {props.label}
     </button>
   );
 }
@@ -64,7 +63,7 @@ class Game extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      history: [Array(9).fill(null!)],
+      history: [Array(256).fill(null!)],
       xIsNext: true,
       selected: [],
       step: 0,
@@ -148,7 +147,7 @@ class Game extends React.Component<
           <Board
             squares={this.state.history[this.state.history.length - 1]}
             onClick={(i: number) => this.handleClick(i)}
-            nRows={3}
+            nRows={16}
           />
         </div>
         <div className="game-info">
