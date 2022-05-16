@@ -9,7 +9,7 @@ function Square(props: { label: string, onClick: () => void }) {
     <button
       className="square"
       onClick={props.onClick}
-      style={{color: props.label}}
+      style={{background: props.label}}
     >
       {props.label}
     </button>
