@@ -114,13 +114,6 @@ class Game extends React.Component<
     });
   }
 
-  jumpTo(step: number) {
-    this.setState({
-      step: step,
-      xIsNext: (step % 2) === 0,
-    });
-  }
-
   render() {
     const winner = calculateWinner(this.state.history[this.state.step]);
     let status;
