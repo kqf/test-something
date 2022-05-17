@@ -7,7 +7,7 @@ import './index.css';
 function Square(props: { selected: boolean, label: string, onClick: () => void }) {
   return (
     <button
-      className={props.selected ? "square:hover" : "square"}
+      className={props.selected ? "square-clicked" : "square"}
       onClick={props.onClick}
       style={{background: props.label}}
     >
