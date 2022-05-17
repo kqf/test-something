@@ -114,13 +114,6 @@ class Game extends React.Component<
     });
   }
 
-  jumpTo(step: number) {
-    this.setState({
-      step: step,
-      xIsNext: (step % 2) === 0,
-    });
-  }
-
   render() {
     const winner = calculateWinner(this.state.history[this.state.step]);
     let status;
@@ -129,17 +122,6 @@ class Game extends React.Component<
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
-
-    const moves = this.state.history.map((step: Array<string>, move: number) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
 
     const panel = <ControlPanel
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
@@ -157,7 +139,6 @@ class Game extends React.Component<
         </div>
         <div className="game-info">
           <div>{status}</div>
-            <ol>{moves}</ol>
           </div>
           <div>
             {this.state.selected.length > 0 ? panel : null}
