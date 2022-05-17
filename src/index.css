@@ -32,7 +32,16 @@ ol, ul {
   width: 34px;
 }
 
-.square:focus {
+.square-clicked {
+  float: left;
+  line-height: 14px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+
   background: #e5e5e5;
   outline: none;
   -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;

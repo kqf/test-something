@@ -4,10 +4,10 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './index.css';
 
-function Square(props: { label: string, onClick: () => void }) {
+function Square(props: { selected: boolean, label: string, onClick: () => void }) {
   return (
     <button
-      className="square"
+      className={props.selected ? "square-clicked" : "square"}
       onClick={props.onClick}
       style={{background: props.label}}
     >
@@ -15,10 +15,14 @@ function Square(props: { label: string, onClick: () => void }) {
   );
 }
 
-function Board(props: { squares: Array<string>, onClick: (i: number) => void, nRows: number }) {
+function Board(props: { squares: Array<string>, selected: Array<number>, onClick: (i: number) => void, nRows: number }) {
   const tiles = props.squares.map((square, index) => {
     return (
-      <Square label={square} onClick={() => props.onClick(index)} />
+      <Square
+        label={square}
+        onClick={() => props.onClick(index)}
+        selected={props.selected.includes(index)}
+      />
     );
   })
 
@@ -146,6 +150,7 @@ class Game extends React.Component<
         <div className="game-board">
           <Board
             squares={this.state.history[this.state.history.length - 1]}
+            selected={this.state.selected}
             onClick={(i: number) => this.handleClick(i)}
             nRows={16}
           />
