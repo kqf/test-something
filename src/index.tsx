@@ -4,12 +4,12 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './index.css';
 
-function Square(props: { selected: boolean, label: string, onClick: () => void }) {
+function Square(props: { selected: boolean, color: string, onClick: () => void }) {
   return (
     <button
       className={props.selected ? "square-clicked" : "square"}
       onClick={props.onClick}
-      style={{background: props.label}}
+      style={{background: props.color}}
     >
     </button>
   );
@@ -19,12 +19,12 @@ function Board(props: { squares: Array<string>, selected: Array<number>, onClick
   const tiles = props.squares.map((square, index) => {
     return (
       <Square
-        label={square}
+        color={square}
         onClick={() => props.onClick(index)}
         selected={props.selected.includes(index)}
       />
     );
-  })
+  });
 
   const nTiles = Math.floor(tiles.length / props.nRows);
   const rows = Array.from({ length: props.nRows }, (x, i) => {
