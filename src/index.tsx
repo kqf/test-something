@@ -24,7 +24,7 @@ function Board(props: { squares: Array<string>, selected: Array<number>, onClick
         selected={props.selected.includes(index)}
       />
     );
-  })
+  });
 
   const nTiles = Math.floor(tiles.length / props.nRows);
   const rows = Array.from({ length: props.nRows }, (x, i) => {
