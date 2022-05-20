@@ -67,7 +67,7 @@ class Game extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      colors: Array(256).fill(null!),
+      colors: Array(512).fill(null!),
       xIsNext: true,
       selected: [],
       step: 0,
