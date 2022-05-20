@@ -132,7 +132,7 @@ class Game extends React.Component<
             squares={this.state.colors}
             selected={this.state.selected}
             onClick={(i: number) => this.handleClick(i)}
-            nRows={16}
+            nRows={Math.floor(Math.sqrt(this.state.colors.length))}
           />
         </div>
         <div className="game-info">
