@@ -167,6 +167,6 @@ function calculateWinner(squares: Array<string>) {
 }
 
 const root = ReactDOMClient.createRoot(
-  document.getElementById("root")
+  document.getElementById("root")!
 );
 root.render(<Game />);
