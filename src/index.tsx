@@ -129,7 +129,7 @@ class Game extends React.Component<
       <div className="game">
         <div className="game-board">
           <Board
-            squares={this.state.colors[this.state.colors.length - 1]}
+            squares={this.state.colors}
             selected={this.state.selected}
             onClick={(i: number) => this.handleClick(i)}
             nRows={16}
