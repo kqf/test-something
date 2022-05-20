@@ -59,7 +59,7 @@ function ControlPanel(props: {onSubmit: (event: React.FormEvent<HTMLFormElement>
 class Game extends React.Component<
   {},
   {
-    history: Array<Array<string>>,
+    colors: Array<string>,
     selected: Array<number>,
     xIsNext: boolean,
     step: number,
@@ -67,7 +67,7 @@ class Game extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      history: [Array(256).fill(null!)],
+      colors: Array(256).fill(null!),
       xIsNext: true,
       selected: [],
       step: 0,
@@ -75,8 +75,7 @@ class Game extends React.Component<
   }
 
   handleClick(i: number) {
-    const history = this.state.history.slice(0, this.state.step + 1);
-    const squares = history[history.length - 1].slice();
+    const squares = this.state.colors.slice();
     if (calculateWinner(squares)) {
       return;
     }
@@ -89,10 +88,10 @@ class Game extends React.Component<
 
     // Update the history
     this.setState({
-      history: this.state.history.concat([squares]),
+      colors: squares,
       selected: xappend(this.state.selected, i),
       xIsNext: !this.state.xIsNext,
-      step: history.length,
+      step: 0,
     });
   }
 
@@ -101,7 +100,7 @@ class Game extends React.Component<
 
     const data = event.target.userdata.value;
     const selected = this.state.selected.slice();
-    const history = this.state.history.slice(0, this.state.step + 1);
+    const history = this.state.colors.slice(0, this.state.step + 1);
     const squares = history[history.length - 1].slice();
 
     const updated = squares.map((element, index) => {
@@ -109,13 +108,13 @@ class Game extends React.Component<
     })
 
     this.setState({
-      history: this.state.history.concat([updated]),
+      colors: this.state.colors.concat([updated]),
       step: this.state.step + 1
     });
   }
 
   render() {
-    const winner = calculateWinner(this.state.history[this.state.step]);
+    const winner = calculateWinner(this.state.colors[this.state.step]);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -131,7 +130,7 @@ class Game extends React.Component<
       <div className="game">
         <div className="game-board">
           <Board
-            squares={this.state.history[this.state.history.length - 1]}
+            squares={this.state.colors[this.state.colors.length - 1]}
             selected={this.state.selected}
             onClick={(i: number) => this.handleClick(i)}
             nRows={16}
