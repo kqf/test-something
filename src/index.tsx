@@ -67,7 +67,7 @@ class Game extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      colors: Array(256).fill(null!),
+      colors: Array(512).fill(null!),
       xIsNext: true,
       selected: [],
       step: 0,
@@ -132,7 +132,7 @@ class Game extends React.Component<
             squares={this.state.colors}
             selected={this.state.selected}
             onClick={(i: number) => this.handleClick(i)}
-            nRows={16}
+            nRows={Math.floor(Math.sqrt(this.state.colors.length))}
           />
         </div>
         <div className="game-info">
