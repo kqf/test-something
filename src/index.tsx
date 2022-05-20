@@ -100,21 +100,20 @@ class Game extends React.Component<
 
     const data = event.target.userdata.value;
     const selected = this.state.selected.slice();
-    const history = this.state.colors.slice(0, this.state.step + 1);
-    const squares = history[history.length - 1].slice();
+    const squares = this.state.colors.slice();
 
     const updated = squares.map((element, index) => {
       return selected.includes(index) ? data : element;
     })
 
     this.setState({
-      colors: this.state.colors.concat([updated]),
+      colors: updated,
       step: this.state.step + 1
     });
   }
 
   render() {
-    const winner = calculateWinner(this.state.colors[this.state.step]);
+    const winner = calculateWinner(this.state.colors);
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
