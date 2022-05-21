@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import './index.css';
 
+
 function Square(props: { selected: boolean, color: string, onClick: () => void }) {
   return (
     <button
@@ -19,6 +20,8 @@ function Board(props: { squares: Array<string>, selected: Array<number>, onClick
   const tiles = props.squares.map((square, index) => {
     return (
       <Square
+        // Rows are immutable
+        key={index}
         color={square}
         onClick={() => props.onClick(index)}
         selected={props.selected.includes(index)}
