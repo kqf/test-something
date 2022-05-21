@@ -32,7 +32,7 @@ function Board(props: { squares: Array<string>, selected: Array<number>, onClick
   const nTiles = Math.floor(tiles.length / props.nRows);
   const rows = Array.from({ length: props.nRows }, (x, i) => {
     return (
-      <div className="board-row">
+      <div key={i} className="board-row">
         {tiles.slice(i * nTiles, (i + 1) * nTiles)}
       </div>
     )
